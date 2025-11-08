@@ -10,3 +10,6 @@ app.use('/api', taskRoutes);
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
+
+import connectDB from './config/db';
+connectDB();

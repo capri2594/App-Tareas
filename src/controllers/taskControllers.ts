@@ -21,24 +21,13 @@ Requisitos:
 - Debe devolver un objeto con los datos de la tarea creada.
 - Debe manejar errores y devolver una respuesta clara si la operación falla.
 */
-export const createTask = async (req: Request, res: Response) => {
+export const createTask = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { title, description } = req.body;
-
-    if (!title || !description) {
-      return res.status(400).json({ error: 'Título y descripción son obligatorios.' });
-    }
-
-    const newTask = await createTaskInDB({
-      title,
-      description,
-      status: 'pendiente',
-    });
-
-    return res.status(201).json(newTask);
+    const { title, description, status } = req.body;
+    const newTask = await createTaskInDB(title, description, status);
+    res.status(201).json(newTask);
   } catch (error) {
-    console.error('Error al crear tarea:', error);
-    return res.status(500).json({ error: 'Error interno del servidor.' });
+    res.status(500).json({ error: 'Error al crear la tarea' });
   }
 };
 
@@ -57,15 +46,16 @@ Requisitos:
 - Debe devolver un arreglo con todas las tareas.
 - Debe manejar errores y devolver una respuesta clara si la operación falla.
 */
-export const getAllTasks = async (_req: Request, res: Response) => {
+export const getAllTasks = async (req: Request, res: Response): Promise<void> => {
   try {
     const tasks = await getAllTasksFromDB();
-    return res.status(200).json(tasks);
+    res.status(200).json(tasks);
   } catch (error) {
     console.error('Error al obtener tareas:', error);
-    return res.status(500).json({ error: 'Error interno del servidor.' });
+    res.status(500).json({ error: 'Error interno del servidor.' });
   }
 };
+
 
 /*
 Especificación funcional: Actualizar el estado de una tarea

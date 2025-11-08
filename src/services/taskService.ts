@@ -1,39 +1,24 @@
-// src/services/taskService.ts
+import Task, { ITask } from '../models/taskModel';
 
-type Task = {
-  id: string;
-  title: string;
-  description: string;
-  status: 'pendiente' | 'en progreso' | 'completada';
+// Crear una nueva tarea en la base de datos
+export const createTaskInDB = async (
+  title: string,
+  description: string,
+  status: string
+): Promise<ITask> => {
+  const newTask = new Task({ title, description, status });
+  return await newTask.save();
 };
 
-const tasks: Task[] = [];
-
-export const createTaskInDB = async (data: {
-  title: string;
-  description: string;
-  status: 'pendiente';
-}): Promise<Task> => {
-  const newTask: Task = {
-    id: crypto.randomUUID(),
-    title: data.title,
-    description: data.description,
-    status: data.status,
-  };
-  tasks.push(newTask);
-  return newTask;
+// Obtener todas las tareas desde la base de datos
+export const getAllTasksFromDB = async (): Promise<ITask[]> => {
+  return await Task.find();
 };
 
-export const getAllTasksFromDB = async (): Promise<Task[]> => {
-  return tasks;
-};
-
+// Actualizar el estado de una tarea por ID
 export const updateTaskStatusInDB = async (
   id: string,
-  status: Task['status']
-): Promise<Task | null> => {
-  const task = tasks.find(t => t.id === id);
-  if (!task) return null;
-  task.status = status;
-  return task;
+  status: string
+): Promise<ITask | null> => {
+  return await Task.findByIdAndUpdate(id, { status }, { new: true });
 };
