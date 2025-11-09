@@ -35,7 +35,7 @@ const TaskList = ({ tasks, loading, error, onTaskDeleted, onTaskUpdated }: Props
 
   return (
     <div className="table-responsive">
-      <h2>Lista de Tareas</h2>
+      <h2>Lista de Tareas Registradas</h2>
       {tasks.length === 0 ? (
         <p>No hay tareas registradas.</p>
       ) : (
