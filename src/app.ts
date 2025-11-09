@@ -10,7 +10,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // 🧩 Middlewares
-app.use(cors());
+app.use(cors({
+  origin: 'https://gestor-tareas-frontend.onrender.com'
+}));
 app.use(express.json());
 app.use((req, res, next) => {
   console.log('📥 Petición recibida:', req.method, req.url);
@@ -30,7 +32,7 @@ const startServer = async () => {
   try {
     await connectDB();
     app.listen(PORT, () => {
-      console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+      console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
     });
   } catch (error) {
     console.error('❌ Error al iniciar el servidor:', error);

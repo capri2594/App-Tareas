@@ -6,8 +6,6 @@ import axios from 'axios';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 
-
-
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +13,7 @@ function App() {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get<Task[]>('http://localhost:3000/api/tasks');
+      const response = await axios.get<Task[]>('https://app-tareas-402.onrender.com/api/tasks');
       setTasks(response.data);
     } catch (err) {
       console.error('Error al obtener tareas:', err);
