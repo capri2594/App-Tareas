@@ -20,7 +20,7 @@ const TaskForm = ({ onTaskCreated }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await axios.post('http://localhost:3000/api/tasks', formData);
+    await axios.post('https://app-tareas-402.onrender.com/api/tasks', formData);
     setFormData({ title: '', description: '', status: 'pendiente' });
     onTaskCreated(); // 👈 Esto actualiza la lista
   };
