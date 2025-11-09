@@ -13,7 +13,7 @@ const TaskList = ({ tasks, loading, error, onTaskDeleted, onTaskUpdated }: Props
   const handleDelete = async (id: string) => {
     try {
       console.log('ID de tarea:', id);
-      await axios.delete(`https://app-tareas-402.onrender.com/api/tasks/${id}`);
+      await axios.delete(`https://app-tareas-d142.onrender.com/api/tasks/${id}`);
       onTaskDeleted();
     } catch (err) {
       console.error('Error al eliminar tarea:', err);
@@ -23,7 +23,7 @@ const TaskList = ({ tasks, loading, error, onTaskDeleted, onTaskUpdated }: Props
   const handleToggleStatus = async (task: Task) => {
     const newStatus = task.status === 'pendiente' ? 'completada' : 'pendiente';
     try {
-      await axios.patch(`https://app-tareas-402.onrender.com/api/tasks/${task._id}/status`, { status: newStatus });
+      await axios.patch(`https://app-tareas-d142.onrender.com/api/tasks/${task._id}/status`, { status: newStatus });
       onTaskUpdated();
     } catch (err) {
       console.error('Error al actualizar estado:', err);
