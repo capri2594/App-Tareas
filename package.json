@@ -4,8 +4,9 @@
   "description": "Gestor de tareas con TypeScript y Express",
   "main": "src/app.ts",
   "scripts": {
+    "dev": "ts-node src/app.ts",
     "build": "tsc",
-    "start": "ts-node src/app.ts"
+    "start": "ts-node dist/app.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
