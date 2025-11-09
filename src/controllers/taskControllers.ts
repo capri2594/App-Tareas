@@ -1,7 +1,11 @@
 // src/controllers/taskController.ts
+import mongoose from 'mongoose';
 
 import { Request, Response } from 'express';
-import { createTaskInDB, getAllTasksFromDB, updateTaskStatusInDB } from '../services/taskService';
+import { createTaskInDB, getAllTasksFromDB, updateTaskStatusInDB,deleteTaskFromDB } from '../services/taskService';
+import Task from '../models/taskModel';
+
+  
 
 /*
 Especificación funcional: Crear una nueva tarea
@@ -96,3 +100,40 @@ export const updateTaskStatus = async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'Error interno del servidor.' });
   }
 };
+/*
+Especificación funcional: Eliminar una tarea existente
+
+Objetivo:
+- Implementar una función que permita eliminar una tarea del sistema mediante su ID.
+
+Requisitos:
+- La función debe estar escrita en TypeScript.
+- Debe seguir el patrón MVC (ubicarse en el controlador correspondiente).
+- Debe cumplir con el principio de responsabilidad única (SRP).
+- Debe usar Async/Await para manejar la operación asíncrona.
+- Debe recibir el ID de la tarea como parámetro en la URL.
+- Debe validar que el ID tenga el formato correcto (ObjectId de MongoDB).
+- Debe verificar si la tarea existe antes de intentar eliminarla.
+- Si la tarea no existe, debe devolver un error 404.
+- Si la eliminación es exitosa, debe devolver una respuesta 204 (sin contenido).
+- Debe manejar errores y devolver una respuesta clara si la operación falla.
+*/
+export const deleteTask = async (req: Request, res: Response): Promise<void> => {
+  const { id } = req.params;
+
+  try {
+    const deleted = await deleteTaskFromDB(id);
+    if (!deleted) {
+      console.log('⚠️ Tarea no encontrada:', id);
+      res.status(404).json({ message: 'Tarea no encontrada.' });
+      return;
+    }
+
+    console.log('✅ Tarea eliminada: ', id);
+    res.status(204).send();
+  } catch (error: any) {
+    console.error('❌ Error al eliminar tarea: ', error.message);
+    res.status(500).json({ message: 'Error al eliminar la tarea.' });
+  }
+};
+

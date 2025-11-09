@@ -1,4 +1,5 @@
 import Task, { ITask } from '../models/taskModel';
+import mongoose from 'mongoose';
 
 // Crear una nueva tarea en la base de datos
 export const createTaskInDB = async (
@@ -21,4 +22,13 @@ export const updateTaskStatusInDB = async (
   status: string
 ): Promise<ITask | null> => {
   return await Task.findByIdAndUpdate(id, { status }, { new: true });
+};
+// Eliminar una tarea por ID
+export const deleteTaskFromDB = async (id: string) => {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new Error('ID inválido');
+  }
+
+  const deleted = await Task.findByIdAndDelete(id);
+  return deleted;
 };
