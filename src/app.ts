@@ -9,17 +9,17 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🧩 Middlewares
-app.use(cors({
-  origin: 'https://app-tareas-6em6.onrender.com' 
-}));
+// ✅ CORS configurado correctamente
+app.use(cors({ origin: '*' }));
+
 app.use(express.json());
+
 app.use((req, res, next) => {
   console.log('📥 Petición recibida:', req.method, req.url);
   next();
 });
 
-// 🏠 Ruta raíz para confirmar que el servidor está activo
+// 🏠 Ruta raíz
 app.get('/', (req, res) => {
   res.send('🚀 API de tareas funcionando correctamente');
 });
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 // 🚀 Rutas de tareas
 app.use('/api/tasks', taskRoutes);
 
-// 🔗 Conexión a MongoDB y arranque del servidor
+// 🔗 Conexión y arranque
 const startServer = async () => {
   try {
     await connectDB();
