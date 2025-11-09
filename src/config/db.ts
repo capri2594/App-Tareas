@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
-const connectDB = async (): Promise<void> => {
+const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/task-manager');
-    console.log('🟢 Conexión a MongoDB exitosa');
+    await mongoose.connect(process.env.MONGO_URI || '');
+    console.log('✅ Conectado a MongoDB');
   } catch (error) {
-    console.error('🔴 Error al conectar a MongoDB:', error);
-    process.exit(1);
+    console.error('❌ Error de conexión a MongoDB:', error);
+    throw error;
   }
 };
 
