@@ -9,8 +9,13 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ CORS configurado correctamente
-app.use(cors({ origin: '*' }));
+// ✅ CORS configurado
+app.use(cors({
+  origin: 'https://app-tareas-d142.onrender.com',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  credentials: true
+}));
+
 
 app.use(express.json());
 
