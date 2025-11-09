@@ -13,7 +13,7 @@ function App() {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get<Task[]>('https://app-tareas-402.onrender.com/api/tasks');
+      const response = await axios.get<Task[]>('https://app-tareas-d142.onrender.com/api/tasks');
       setTasks(response.data);
     } catch (err) {
       console.error('Error al obtener tareas:', err);
