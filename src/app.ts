@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 // ✅ CORS configurado
 app.use(cors({
-  origin: 'https://app-tareas-d142.onrender.com',
+  origin: '*',
   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   credentials: true
 }));
