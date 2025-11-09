@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 // 🧩 Middlewares
 app.use(cors({
-  origin: 'https://app-tareas-1-66ws.onrender.com' 
+  origin: 'https://app-tareas-6em6.onrender.com' 
 }));
 app.use(express.json());
 app.use((req, res, next) => {
