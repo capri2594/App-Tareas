@@ -17,8 +17,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// 🚀 Rutas
-app.use('/api/tasks', taskRoutes); // Monta directamente en /api/tasks
+// 🏠 Ruta raíz para confirmar que el servidor está activo
+app.get('/', (req, res) => {
+  res.send('🚀 API de tareas funcionando correctamente');
+});
+
+// 🚀 Rutas de tareas
+app.use('/api/tasks', taskRoutes);
 
 // 🔗 Conexión a MongoDB y arranque del servidor
 const startServer = async () => {
