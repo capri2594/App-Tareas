@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Gestor de Tareas</h1>
+      <h1>Gestor de Tareas<small>by R.J.F.J</small></h1>
       <TaskForm onTaskCreated={fetchTasks} />
       <TaskList
         tasks={tasks}
